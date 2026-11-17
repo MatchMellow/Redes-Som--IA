@@ -5,7 +5,6 @@ import pandas as pd
 def normalizar_dados(df, colunas):
 
     resultado = df.copy()
-
     parametros = {}
 
     for coluna in colunas:

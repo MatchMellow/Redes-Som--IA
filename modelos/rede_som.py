@@ -12,7 +12,7 @@ class RedeSOM:
         dimensoes,
         taxa_aprendizado=0.5,
         sigma=None,
-        epocas=10,
+        epocas=30,
         semente=42
     ):
 
@@ -29,11 +29,16 @@ class RedeSOM:
 
         self.epocas = epocas
 
-        random.seed(semente)
-
-        # Inicialização dos pesos
+        self.historico_erros = []
         self.pesos = []
 
+        # Gerador de números aleatórios com semente fixa. É usado nos
+        # pesos iniciais E na ordem dos municípios em cada época, para
+        # que o mesmo código com os mesmos dados dê sempre o mesmo mapa.
+        self.gerador = random.Random(semente)
+        gerador = self.gerador
+
+        # Inicializar os pesos dos neurônios
         for i in range(linhas):
 
             linha = []
@@ -41,7 +46,7 @@ class RedeSOM:
             for j in range(colunas):
 
                 neuronio = [
-                    random.random()
+                    gerador.random()
                     for _ in range(dimensoes)
                 ]
 
@@ -49,24 +54,23 @@ class RedeSOM:
 
             self.pesos.append(linha)
 
-    # Distância euclidiana
+    # Calcular distância euclidiana
     def distancia(self, vetor1, vetor2):
 
         soma = 0
 
-        for i in range(self.dimensoes):
+        for k in range(self.dimensoes):
 
-            diferenca = vetor1[i] - vetor2[i]
+            diferenca = vetor1[k] - vetor2[k]
 
             soma += diferenca ** 2
 
         return math.sqrt(soma)
 
-    # Encontrar o neurônio vencedor
+    # Encontrar o neurônio mais próximo (BMU)
     def encontrar_bmu(self, entrada):
 
         menor_distancia = float("inf")
-
         melhor_neuronio = (0, 0)
 
         for i in range(self.linhas):
@@ -81,12 +85,11 @@ class RedeSOM:
                 if distancia < menor_distancia:
 
                     menor_distancia = distancia
-
                     melhor_neuronio = (i, j)
 
         return melhor_neuronio
 
-    # Função de vizinhança gaussiana
+    # Calcular influência da vizinhança
     def vizinhanca(self, distancia_mapa, sigma):
 
         return math.exp(
@@ -94,7 +97,7 @@ class RedeSOM:
             (2 * sigma ** 2)
         )
 
-    # Atualizar pesos dos neurônios
+    # Atualizar os pesos
     def atualizar_pesos(
         self,
         entrada,
@@ -121,36 +124,40 @@ class RedeSOM:
 
                 for k in range(self.dimensoes):
 
-                    peso_atual = self.pesos[i][j][k]
+                    peso = self.pesos[i][j][k]
 
-                    diferenca = (
-                        entrada[k] - peso_atual
-                    )
+                    diferenca = entrada[k] - peso
 
                     self.pesos[i][j][k] += (
                         taxa * influencia * diferenca
                     )
 
-    # Processo de treinamento
-    def treinar(self, dados):
+    # Treinar a rede
+    def treinar(self, dados, callback=None):
 
         total = len(dados)
 
+        if total == 0:
+            raise ValueError("A base de treinamento está vazia.")
+
         for epoca in range(self.epocas):
+
+            progresso = epoca / max(1, self.epocas - 1)
 
             taxa = (
                 self.taxa_inicial *
-                math.exp(-epoca / self.epocas)
+                math.exp(-progresso)
             )
 
             sigma = (
                 self.sigma_inicial *
-                math.exp(-epoca / self.epocas)
+                math.exp(-progresso)
             )
 
             ordem = list(range(total))
-
-            random.shuffle(ordem)
+            # Usa o gerador com semente (antes usava random.shuffle,
+            # sem semente, e cada execução gerava um mapa diferente)
+            self.gerador.shuffle(ordem)
 
             erro_total = 0
 
@@ -174,14 +181,24 @@ class RedeSOM:
 
             erro_medio = erro_total / total
 
+            self.historico_erros.append(erro_medio)
+
             print(
                 f"Época {epoca + 1}/{self.epocas} "
                 f"| Erro médio: {erro_medio:.6f}"
             )
 
+            if callback is not None:
+                callback(
+                    epoca + 1,
+                    self.epocas,
+                    erro_medio,
+                    self
+                )
+
         print("\nTreinamento concluído!")
 
-    # Mapear cada entrada para seu neurônio vencedor
+    # Identificar neurônio vencedor de cada município
     def mapear(self, dados):
 
         resultados = []
@@ -193,3 +210,8 @@ class RedeSOM:
             resultados.append(bmu)
 
         return resultados
+
+    # Retornar matriz de pesos
+    def obter_pesos(self):
+
+        return self.pesos

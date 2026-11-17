@@ -1,0 +1,27 @@
+id_municipio,nome_atual,uf,nome_idhm_2010,tipo,observacao
+2401206,Arez,RN,Arês,grafia,Grafia oficial atual difere da usada no Atlas 2010
+2400208,Assú,RN,Açu,grafia,Grafia oficial atual difere da usada no Atlas 2010
+3108909,Brazópolis,MG,Brasópolis,grafia,Grafia oficial atual difere da usada no Atlas 2010
+3122900,Dona Euzébia,MG,Dona Eusébia,grafia,Grafia oficial atual difere da usada no Atlas 2010
+3516101,Florínea,SP,Florínia,grafia,Grafia oficial atual difere da usada no Atlas 2010
+2802601,Graccho Cardoso,SE,Gracho Cardoso,grafia,Grafia oficial atual difere da usada no Atlas 2010
+2606903,Iguaracy,PE,Iguaraci,grafia,Grafia oficial atual difere da usada no Atlas 2010
+2306306,Itapajé,CE,Itapagé,grafia,Grafia oficial atual difere da usada no Atlas 2010
+5107008,Poxoréu,MT,Poxoréo,grafia,Grafia oficial atual difere da usada no Atlas 2010
+1506500,Santa Izabel do Pará,PA,Santa Isabel do Pará,grafia,Grafia oficial atual difere da usada no Atlas 2010
+2928505,Santa Terezinha,BA,Santa Teresinha,grafia,Grafia oficial atual difere da usada no Atlas 2010
+3550001,São Luiz do Paraitinga,SP,São Luís do Paraitinga,grafia,Grafia oficial atual difere da usada no Atlas 2010
+3165206,São Tomé das Letras,MG,São Thomé das Letras,grafia,Grafia oficial atual difere da usada no Atlas 2010
+3515004,Embu das Artes,SP,Embu,renomeado,Município renomeado após 2010
+2401305,Campo Grande,RN,Augusto Severo,renomeado,Município renomeado após 2010
+2513653,Joca Claudino,PB,Santarém,renomeado,Município renomeado após 2010 (Santarém da Paraíba; não confundir com Santarém-PA)
+2410306,Serra Caiada,RN,Presidente Juscelino,renomeado,Município renomeado após 2010
+1400605,São Luiz do Anauá,RR,São Luiz,renomeado,Município renomeado após 2010
+2515401,São Vicente do Seridó,PB,Seridó,renomeado,Município renomeado após 2010
+1708254,Tabocão,TO,Fortaleza do Tabocão,renomeado,Município renomeado após 2010
+4220000,Balneário Rincão,SC,Içara,criado_apos_2010,Sem IDHM oficial; usa o IDHM de 2010 do município de origem (estimativa)
+4212650,Pescaria Brava,SC,Laguna,criado_apos_2010,Sem IDHM oficial; usa o IDHM de 2010 do município de origem (estimativa)
+1504752,Mojuí dos Campos,PA,Santarém,criado_apos_2010,Sem IDHM oficial; usa o IDHM de 2010 do município de origem (estimativa)
+4314548,Pinto Bandeira,RS,Bento Gonçalves,criado_apos_2010,Sem IDHM oficial; usa o IDHM de 2010 do município de origem (estimativa)
+5006275,Paraíso das Águas,MS,Costa Rica,criado_apos_2010,Sem IDHM oficial; desmembrado de mais de um município - usa Costa Rica como origem principal (estimativa a conferir)
+5101837,Boa Esperança do Norte,MT,Sorriso,criado_apos_2010,Sem IDHM oficial; desmembrado de mais de um município - usa Sorriso como origem principal (estimativa a conferir)

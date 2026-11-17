@@ -31,8 +31,12 @@ def criar_mapa_neural(df):
 
     figura.update_layout(
         title="Mapa de ocupação da rede SOM",
-        xaxis_title="Colunas dos neurônios",
-        yaxis_title="Linhas dos neurônios"
+        xaxis_title="Coluna do neurônio",
+        yaxis_title="Linha do neurônio",
+        # Mesma orientação dos mapas por indicador: linha 0 em cima
+        yaxis=dict(autorange="reversed", scaleanchor="x", dtick=1),
+        xaxis=dict(dtick=1),
+        height=560
     )
 
     return figura
